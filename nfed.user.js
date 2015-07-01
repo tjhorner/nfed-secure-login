@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NavyFederal Secure Login
 // @namespace    https://horner.tj/
-// @version      0.2
+// @version      0.3
 // @description  A secure autofill for Navy Federal
 // @author       TJ Horner
 // @match        *://*.navyfederal.org/*
@@ -15,7 +15,7 @@ SecureLogin = (function(){
   if($("#logon").length || $("#Login").length){
     if(!GM_getValue("nfed_crypto_p")){
       var tempPhrase = prompt("NFed Secure Login\n" + 
-                              "Please enter a secure passphrase used to sign into your account:");
+                              "Please enter a secure passphrase used to encrypt your username and password:");
       alert("Passphrase set, sign in normally.");
       var credSet = false;
       $("#logon, #Login").submit(function(e){
