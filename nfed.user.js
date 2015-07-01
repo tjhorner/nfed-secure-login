@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NavyFederal Secure Login
 // @namespace    https://horner.tj/
-// @version      0.3
+// @version      0.4
 // @description  A secure autofill for Navy Federal
 // @author       TJ Horner
 // @match        *://*.navyfederal.org/*
@@ -37,6 +37,18 @@ SecureLogin = (function(){
         
         var $overlay = $("<div>");
         var $overlayButton = $("<a>");
+        var $resetButton = $("#logIn").clone();
+        
+        $resetButton.attr("id", "nfedReset")
+                    .attr("value", "RESET SECURE LOGIN")
+                    .attr("onclick", "void()")
+                    .click(function(e){
+                      e.preventDefault();
+                      GM_setValue("nfed_crypto_p", "");
+                      GM_setValue("nfed_crypto_u", "");
+                      alert("Encrypted username and password reset, refreshing page.");
+                      window.location = window.location.href;
+                    });
         
         $overlayButton.text("Cancel")
                       .css("cursor", "pointer")
@@ -49,6 +61,9 @@ SecureLogin = (function(){
                 .append($overlayButton);
         
         $("body").append($overlay);
+        
+        $("#logon, #Login").append("<br>")
+                           .append($resetButton);
         
         var pass = GibberishAES.dec(p, passphrase),
             user = GibberishAES.dec(u, passphrase);
