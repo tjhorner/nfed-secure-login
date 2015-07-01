@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NavyFederal Secure Login
 // @namespace    https://horner.tj/
-// @version      0.4
+// @version      0.4.1
 // @description  A secure autofill for Navy Federal
 // @author       TJ Horner
 // @match        *://*.navyfederal.org/*
@@ -37,7 +37,7 @@ SecureLogin = (function(){
         
         var $overlay = $("<div>");
         var $overlayButton = $("<a>");
-        var $resetButton = $("#logIn").clone();
+        var $resetButton = $("#signIn").clone();
         
         $resetButton.attr("id", "nfedReset")
                     .attr("value", "RESET SECURE LOGIN")
