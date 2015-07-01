@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NavyFederal Secure Login
 // @namespace    https://horner.tj/
-// @version      0.4.3
+// @version      0.4.4
 // @description  A secure autofill for Navy Federal
 // @author       TJ Horner
 // @match        *://*.navyfederal.org/*
@@ -20,14 +20,15 @@ SecureLogin = (function(){
       var credSet = false;
       
       var setCreds = function(e){
-        if(!credSet)
+        if(!credSet){
           e.preventDefault();
-        GM_setValue("nfed_crypto_p", GibberishAES.enc($("#password").val(), tempPhrase));
-        GM_setValue("nfed_crypto_u", GibberishAES.enc($("#user").val(), tempPhrase));
-        alert("NFed Secure Login credentials saved, next time you login, type in the passphrase you chose earlier.");
-        credSet = true;
-        $($("#logon")[0]).submit();
-        $($("#Login")[0]).submit();
+          GM_setValue("nfed_crypto_p", GibberishAES.enc($("#password").val(), tempPhrase));
+          GM_setValue("nfed_crypto_u", GibberishAES.enc($("#user").val(), tempPhrase));
+          alert("NFed Secure Login credentials saved, next time you login, type in the passphrase you chose earlier.");
+          credSet = true;
+          $($("#logon")[0]).submit();
+          $($("#Login")[0]).submit();
+        }
       };
       
       $($("#logon")[0]).submit(setCreds);
@@ -67,7 +68,7 @@ SecureLogin = (function(){
         
         $("body").append($overlay);
         
-        $("#logon, #Login").append("<br>")
+        $("#logon, #Login").append("<br><br>")
                            .append($resetButton);
         
         var pass = GibberishAES.dec(p, passphrase),
