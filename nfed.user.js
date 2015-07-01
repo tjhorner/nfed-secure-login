@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         NavyFederal Secure Login
 // @namespace    https://horner.tj/
-// @version      0.5
+// @version      0.5.1
 // @description  A secure autofill for Navy Federal
 // @author       TJ Horner
 // @match        *://*.navyfederal.org/*
@@ -53,6 +53,7 @@ SecureLogin = (function(){
                         GM_setValue("nfed_crypto_p", "");
                         GM_setValue("nfed_crypto_u", "");
                         alert("Encrypted username and password reset, refreshing page.");
+                        window.location = window.location.href;
                       });
           
           $overlayButton.text("Cancel")
